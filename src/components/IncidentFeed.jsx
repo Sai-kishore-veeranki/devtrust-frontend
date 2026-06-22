@@ -12,8 +12,23 @@ export default function IncidentFeed() {
       .then(setIncidents)
       .catch((err) => console.error('Failed to load incidents', err));
 
-    const client = connectIncidentSocket((newIncident) => {
-      setIncidents((prev) => [newIncident, ...prev].slice(0, 50));
+    const client = connectIncidentSocket((updatedIncident) => {
+      setIncidents((prev) => {
+        const existingIndex = prev.findIndex(
+          (i) => i.incidentId === updatedIncident.incidentId
+        );
+
+        if (existingIndex !== -1) {
+          // Same incident arriving again (e.g. AI root cause now attached) — replace in place
+          const updated = [...prev];
+          updated[existingIndex] = updatedIncident;
+          return updated;
+        }
+
+        // Genuinely new incident — prepend it
+        return [updatedIncident, ...prev].slice(0, 50);
+      });
+
       setConnected(true);
     });
 
