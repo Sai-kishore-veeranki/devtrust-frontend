@@ -41,6 +41,23 @@ export default function IncidentCard({ incident }) {
         {' · '}{incident.deltaSeconds}s after deploy
         {' · '}{Math.round(incident.confidenceScore * 100)}% confidence
       </p>
+
+      {incident.rootCauseAnalysis && (
+        <div style={{
+          marginTop: '10px',
+          padding: '10px 12px',
+          background: '#f9fafb',
+          borderRadius: '6px',
+          fontSize: '12px',
+          color: '#374151',
+          lineHeight: '1.5',
+        }}>
+          <strong style={{ display: 'block', marginBottom: '4px', color: '#6b7280', fontSize: '11px', textTransform: 'uppercase' }}>
+            AI root cause analysis
+          </strong>
+          {incident.rootCauseAnalysis}
+        </div>
+      )}
     </div>
   );
 }
