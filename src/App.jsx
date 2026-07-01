@@ -1,7 +1,13 @@
 import IncidentFeed from './components/IncidentFeed';
+import DoraMetrics from './components/DoraMetrics';
 
 function App() {
-  return <IncidentFeed />;
+  return (
+    <>
+      <DoraMetrics />
+      <IncidentFeed />
+    </>
+  );
 }
 
 export default App;
