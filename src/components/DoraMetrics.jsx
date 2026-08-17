@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-
-const API_BASE = 'http://localhost:8080/api';
+import { fetchDoraMetrics } from '../services/api';
 
 const MetricCard = ({ label, value, unit, description }) => (
   <div style={{
@@ -27,8 +25,8 @@ export default function DoraMetrics() {
   const [days, setDays] = useState(30);
 
   useEffect(() => {
-    axios.get(`${API_BASE}/dora?days=${days}`)
-      .then(res => setMetrics(res.data))
+    fetchDoraMetrics(days)
+      .then(setMetrics)
       .catch(err => console.error('Failed to load DORA metrics', err));
   }, [days]);
 
@@ -72,6 +70,12 @@ export default function DoraMetrics() {
           value={metrics.open_incidents}
           unit=""
           description={`of ${metrics.total_incidents} total`}
+        />
+        <MetricCard
+          label="Total deployments"
+          value={metrics.total_deployments}
+          unit=""
+          description="Observed in this period"
         />
       </div>
     </div>

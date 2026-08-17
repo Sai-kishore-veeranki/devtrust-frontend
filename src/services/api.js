@@ -6,3 +6,13 @@ export async function fetchLatestIncidents() {
   const response = await axios.get(`${API_BASE}/incidents`);
   return response.data;
 }
+
+export async function fetchDoraMetrics(days) {
+  const response = await axios.get(`${API_BASE}/dora`, { params: { days } });
+  return response.data;
+}
+
+export async function fetchServiceGraph() {
+  const response = await axios.get(`${API_BASE}/graph`);
+  return response.data;
+}

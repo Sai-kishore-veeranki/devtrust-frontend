@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import axios from 'axios';
-
-const API_BASE = 'http://localhost:8080/api';
+import { fetchServiceGraph } from '../services/api';
 
 const statusColors = {
   HEALTHY:  '#22c55e',
@@ -17,8 +15,8 @@ export default function ServiceGraph() {
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-    axios.get(`${API_BASE}/graph`)
-      .then(res => setGraphData(res.data))
+    fetchServiceGraph()
+      .then(setGraphData)
       .catch(err => console.error('Failed to load graph', err));
   }, []);
 
