@@ -76,7 +76,7 @@ For local development these default to `http://localhost:8080` — no `.env` fil
 ```
 src/
 ├── components/
-│   ├── IncidentCard.jsx      # Individual incident card with cost + AI data
+│   ├── IncidentCard.jsx     # Individual incident card with cost + AI data
 │   ├── IncidentFeed.jsx      # Live WebSocket-connected incident list
 │   ├── DoraMetrics.jsx       # Engineering health metric cards
 │   └── ServiceGraph.jsx      # D3.js interactive dependency graph
